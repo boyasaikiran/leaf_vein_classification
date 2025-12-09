@@ -1,9 +1,10 @@
-🌿 Leaf Vein Classification System using Machine Learning
+#🌿 Leaf Vein Classification System using Machine Learning
 
 This project classifies plant leaves into their species and health condition using vein structure analysis.
 It extracts the skeleton pattern, converts it into numerical features, and uses a Random Forest classifier to predict leaf type.
 
 This system works on any uploaded leaf image and provides:
+
 ✔️ Skeletonized vein map
 ✔️ Extracted numerical features
 ✔️ Machine learning prediction
@@ -15,23 +16,23 @@ This system works on any uploaded leaf image and provides:
 Your dataset must follow this format:
 
 Leaf_Dataset/
-   ├── Class_1/
-   │      ├── img1.jpg
-   │      └── img2.jpg
-   ├── Class_2/
-   │      ├── img1.jpg
-   │      └── img2.jpg
-   └── Class_n/
+├── Class_1/
+│   ├── img1.jpg
+│   └── img2.jpg
+├── Class_2/
+│   ├── img1.jpg
+│   └── img2.jpg
+└── Class_n/
 
 
 Example:
 
 Plants/train/
-   ├── Mango_Healthy/
-   ├── Mango_Diseased/
-   ├── Guava_Healthy/
-   ├── Guava_Diseased/
-   └── ...
+├── Mango_Healthy/
+├── Mango_Diseased/
+├── Guava_Healthy/
+├── Guava_Diseased/
+└── ...
 
 🔬 Methodology
 🧮 1. Preprocessing (OpenCV)
@@ -62,7 +63,7 @@ Vein density metrics
 
 Statistical descriptors
 
-Output: a 13-dimensional feature vector.
+📌 Output: a 13-dimensional feature vector.
 
 🌲 3. Model Used: RandomForestClassifier
 
@@ -113,14 +114,13 @@ python train_model.py
 This generates:
 
 models/random_forest_model.pkl
-
 models/scaler.pkl
 
 🧪 Testing with Streamlit UI
 streamlit run app.py
 
-
 Streamlit Output Provides:
+
 👍 Original Image
 👍 Skeleton Vein Map
 👍 Feature Extraction Table
@@ -128,21 +128,20 @@ Streamlit Output Provides:
 
 🧵 Project Folder Structure
 leaf_vein_classification/
-   ├── src/
-   │     ├── preprocessing.py
-   │     └── feature_extraction.py
-   ├── models/
-   │     ├── random_forest_model.pkl
-   │     └── scaler.pkl
-   ├── train_model.py
-   ├── app.py
-   ├── requirements.txt
-   └── README.md
+├── src/
+│   ├── preprocessing.py
+│   └── feature_extraction.py
+├── models/
+│   ├── random_forest_model.pkl
+│   └── scaler.pkl
+├── train_model.py
+├── app.py
+├── requirements.txt
+└── README.md
 
 🎥 Demo Proof (Video)
 
 You can add here:
-
 📌 Uploaded demonstration video link (Google Drive / YouTube).
 
 👨‍🏫 How to Explain to Guide (Summary)
@@ -160,3 +159,8 @@ Frontend built with Streamlit for live testing.
 Works on any leaf uploaded by the user.
 
 📝 Results / Outputs
+
+✔️ Skeleton image
+✔️ Feature matrix (13 values)
+✔️ Model prediction (leaf class)
+✔️ Accuracy ~75%
