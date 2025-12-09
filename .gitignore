@@ -1,0 +1,9 @@
+venv/
+models/
+__pycache__/
+*.pkl
+*.png
+*.jpg
+*.jpeg
+temp_*
+*.ipynb_checkpoints
