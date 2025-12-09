@@ -1,166 +1,52 @@
-#🌿 Leaf Vein Classification System using Machine Learning
+🌿 Leaf Vein Classification System using Machine Learning
+📝 Project Summary
 
-This project classifies plant leaves into their species and health condition using vein structure analysis.
-It extracts the skeleton pattern, converts it into numerical features, and uses a Random Forest classifier to predict leaf type.
+This project implements an Automated Leaf Vein Classification System using computer vision (OpenCV) and machine learning (Random Forest). The core idea is that the vein structure (venation) of a plant leaf contains unique features that can be used to accurately identify both the species and its health condition (healthy vs. diseased).
 
-This system works on any uploaded leaf image and provides:
-
-✔️ Skeletonized vein map
-✔️ Extracted numerical features
-✔️ Machine learning prediction
-✔️ Classification accuracy
-✔️ A Streamlit-based testing UI
-
-📁 Dataset Structure
-
-Your dataset must follow this format:
-
-Leaf_Dataset/
-├── Class_1/
-│   ├── img1.jpg
-│   └── img2.jpg
-├── Class_2/
-│   ├── img1.jpg
-│   └── img2.jpg
-└── Class_n/
-
-
-Example:
-
-Plants/train/
-├── Mango_Healthy/
-├── Mango_Diseased/
-├── Guava_Healthy/
-├── Guava_Diseased/
-└── ...
-
+The system processes an uploaded leaf image through a structured pipeline: Preprocessing → Feature Extraction → Machine Learning Classification.
 🔬 Methodology
-🧮 1. Preprocessing (OpenCV)
+1. 🧮 Preprocessing & Skeletonization (OpenCV)
 
-Resize and normalize image
+The initial image is transformed into a binary skeleton map of the veins, isolating the structural pattern for analysis.
 
-Convert to grayscale
+The key steps are:
 
-Apply Gaussian filter
+    Image Preparation: Resize and normalize the input image.
 
-Binary thresholding
+    Grayscale Conversion: Convert the image to grayscale.
 
-Morphological thinning to obtain vein skeleton
+    Noise Reduction: Apply a Gaussian filter.
 
-🧪 2. Feature Extraction
+    Segmentation: Apply Binary thresholding.
 
-From the skeleton we calculate:
+    Vein Extraction: Use Morphological thinning (skeletonization) to obtain a single-pixel-wide vein map.
 
-Number of vein segments
+2. 🧪 Feature Extraction
 
-Length of veins
+From the skeletonized vein map, quantitative, structural, and statistical metrics are calculated.
 
-Mean branch thickness
+The Output is a 13-dimensional feature vector for each leaf, which includes:
 
-Area covered by veins
+    Structural Metrics: Number of vein segments, total length of veins, mean branch thickness.
 
-Vein density metrics
+    Density Metrics: Area covered by veins, vein density metrics.
 
-Statistical descriptors
+    Statistical Descriptors: Additional statistical measures of the vein pattern.
 
-📌 Output: a 13-dimensional feature vector.
+3. 🌲 Model Used: RandomForestClassifier
 
-🌲 3. Model Used: RandomForestClassifier
+A Random Forest Classifier is used for the prediction task. This model is chosen for its robustness, ability to handle noise, and effectiveness with structured features typical of biological patterns.
 
-Works well on structured features
+    Training Setup:
 
-Handles noise and outliers
+        Train/Test Split: 80% / 20%
 
-Robust for biological image patterns
+        Normalization: Applied using StandardScaler.
 
-Training:
-
-Train-test split = 80 / 20
-
-Normalization using StandardScaler
-
-Saved as random_forest_model.pkl
+        Model Artefacts: Trained model and scaler saved as random_forest_model.pkl and scaler.pkl.
 
 📊 Model Performance
 
-Accuracy: ~75%
-
-Evaluated on 22 classes (11 plants × healthy/diseased)
-
-Metrics generated:
-
-Precision
-
-Recall
-
-F1-score
-
-Confusion matrix
-
-🚀 Installation
-git clone https://github.com/boyasaikiran/leaf_vein_classification.git
-cd leaf_vein_classification
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-
-🧠 Training the Model
-
-Modify dataset path in train_model.py and run:
-
-python train_model.py
-
-
-This generates:
-
-models/random_forest_model.pkl
-models/scaler.pkl
-
-🧪 Testing with Streamlit UI
-streamlit run app.py
-
-Streamlit Output Provides:
-
-👍 Original Image
-👍 Skeleton Vein Map
-👍 Feature Extraction Table
-👍 Predicted Leaf Class
-
-🧵 Project Folder Structure
-leaf_vein_classification/
-├── src/
-│   ├── preprocessing.py
-│   └── feature_extraction.py
-├── models/
-│   ├── random_forest_model.pkl
-│   └── scaler.pkl
-├── train_model.py
-├── app.py
-├── requirements.txt
-└── README.md
-
-🎥 Demo Proof (Video)
-
-You can add here:
-📌 Uploaded demonstration video link (Google Drive / YouTube).
-
-👨‍🏫 How to Explain to Guide (Summary)
-
-We extract skeleton veins because veins uniquely identify leaf type.
-
-We convert skeleton into 13 measured features.
-
-We train RandomForest for classification.
-
-Accuracy achieved: ~75%.
-
-Frontend built with Streamlit for live testing.
-
-Works on any leaf uploaded by the user.
-
-📝 Results / Outputs
-
-✔️ Skeleton image
-✔️ Feature matrix (13 values)
-✔️ Model prediction (leaf class)
-✔️ Accuracy ~75%
+The model was evaluated on a dataset encompassing 22 classes (e.g., Mango_Healthy, Guava_Diseased, etc. - 11 plant types × 2 conditions).
+Metric	Value
+Classification Accuracy	~75%
